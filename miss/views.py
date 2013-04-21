@@ -48,17 +48,17 @@ def regions_view(request):
 
 @json_response(ajax_required=False, login_required=False)
 def add_region_view(request):
-    if request.method != 'POST' or 'wkt' not in request.POST:
+    if request.method != 'POST' or 'point' not in request.POST:
         return {'success': False, 'message': _("Invalid request")}
 
     region = Region(
         user=request.user,
         name=request.POST.get('name',''),
-        region=GEOSGeometry(request.POST.get('wkt','')),
-        when_to_capture=request.POST.get('when_to_capture',''),
-        application_type=request.POST.get('application_type',''),
-        imagery_type=request.POST.get('imagery_type',''),
-        imagery_problem_type=request.POST.get('imagery_problem_type','')
+        region=GEOSGeometry(request.POST.get('point','')),
+        when_to_capture=request.POST.get('appropriate_capture_time',''),
+        application_type=request.POST.get('application',''),
+        imagery_type=request.POST.get('imagery',''),
+        imagery_problem_type=request.POST.get('imagery_problem','')
     )
     region.save()
 
