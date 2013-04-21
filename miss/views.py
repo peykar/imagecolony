@@ -47,6 +47,7 @@ def vote_view(request):
     region.vote_set.create(user=request.user, weight=value)    
 
     current_vote = region.vote_set.aggregate(Sum('weight'))
+    current_vote = current_vote['weight__sum']
     if current_vote is None:
         current_vote = 0
 
