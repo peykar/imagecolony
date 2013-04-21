@@ -61,7 +61,7 @@ class Region(models.Model):
     objects = models.GeoManager()
 
     def __unicode__(self):
-        self.name
+        self.name or region.wkt
 
 class Vote(models.Model):
     user = models.ForeignKey(User)
