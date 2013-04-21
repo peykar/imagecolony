@@ -46,7 +46,7 @@ class Region(models.Model):
         ('cld', 'cloudy imagery'),
         ('low', 'low resolution imagery'),
         ('old', 'old imagery'),
-        ('cen', 'censored imagery'
+        ('cen', 'censored imagery'),
     )
 
     user = models.ForeignKey(User)
