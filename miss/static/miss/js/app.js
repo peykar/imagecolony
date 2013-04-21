@@ -29,7 +29,11 @@ function init() {
 function show(type, m) {
   var dom = '<div class="alert alert-floating alert-' + type + ' fade in"><button type="button" class="close" data-dismiss="alert">&times;</button>' + m + '</div>';
   $(dom).appendTo('body');
-  $(".alert").alert();
+  dom = $(".alert").alert();
+
+  setTimeout(function() {
+    $(this).alert('close');
+  }.bind(dom), 8000);
 }
 
 // Authentication
