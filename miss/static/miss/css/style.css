@@ -1,0 +1,71 @@
+html, body { height: 100%; }
+
+.container-custom {
+  width: 100%;
+  height: 100%;
+  margin: 41px 0;
+}
+
+#sidebar {
+  float: right;
+  width: 30%;
+  height: 100%;
+  background-color: #fff;
+  border-left: 1px solid #bbb;
+  box-shadow: 0 0 10px #ddd;
+}
+
+#map-container {
+  float: right;
+  width: 70%;
+  height: 100%;
+}
+
+#sidebar, #map-container {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.nav-tabs { padding: 0 5px; }
+.nav-tabs > li > a {
+  border-radius: 0;
+  color: #555;
+}
+
+.nav-list > li {
+  display: block;
+  margin-right: -15px;
+  margin-left: -15px;
+  padding: 0 15px;
+}
+.nav-list > li > a {
+  float: left;
+  padding: 3px 15px;
+}
+.nav-list > li > .score {
+  float: left;
+  padding: 3px 8px 3px 0;
+}
+
+.nav > li > a:hover, .nav > li > a:focus,
+.nav > li.nav-header:hover, .nav > li.nav-header:focus { background-color: transparent; }
+.nav > li:hover, .nav > li:focus { background-color: #eee; }
+
+#add form {
+  display: block;
+  width: 220px;
+  margin: 30px auto;
+}
+
+#footer .navbar-inner {
+  min-height: 25px;
+  line-height: 25px;
+}
+
+.copyright {
+  color: #999;
+  font-size: 75%;
+}
+
+.modal > form { margin-bottom: 0; }
