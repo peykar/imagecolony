@@ -20,6 +20,8 @@ html, body { height: 100%; }
   width: 70%;
   height: 100%;
 }
+/* OpenLayers-Bootstrap compatibility fix */
+#map img { max-width: none; }
 
 #sidebar, #map {
   -webkit-box-sizing: border-box;
