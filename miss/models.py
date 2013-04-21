@@ -18,22 +18,35 @@ class UserProfile(models.Model):
 
 class Region(models.Model):
     APPLICATION_TYPES = (
-        ('aaa', 'First Priority'),
-        ('bbb', 'Second Priority'),
-        ('ccc', 'Third Priority'),
+        ('map', 'Mapping and Location-based Services'),
+        ('dis', 'Disaster Response'),
+        ('met', 'Meteorology'),
+        ('agr', 'Agriculture'),
+        ('fst', 'Forestry'),
+        ('bio', 'Biodiversity conservation'),
+        ('reg', 'Regional planning'),
+        ('edu', 'Education'),
+        ('iaw', 'Intelligence and warfare'),
+        ('etc', 'etc...'),
     )
 
     IMAGERY_TYPES = (
-        ('aaa', 'First IMAGERY'),
-        ('bbb', 'Second IMAGERY'),
-        ('ccc', 'Third IMAGERY'),
+        ('vis', 'Visible'),
+        ('inf', 'Infrared'),
+        ('wat', 'Water vapor'),
     )
 
     IMAGERY_PROBLEM_TYPES = (
-        ('noi', 'No Imagery'),
-        ('cld', 'Cloudy Image'),
-        ('low', 'Low Resolution Image'),
-        ('old', 'Old Imagery'),
+        #('low', 'The spot has low resolution imagery'),
+        #('noi', 'The spot has no imagery'),
+        #('cld', 'The spot has cloudy imagery'),
+        #('old', 'The spot has old imagery'),
+        #('cen', 'The spot has censorsed imagery'),
+        ('noi', 'no imagery'),
+        ('cld', 'cloudy imagery'),
+        ('low', 'low resolution imagery'),
+        ('old', 'old imagery'),
+        ('cen', 'censored imagery'
     )
 
     user = models.ForeignKey(User)
