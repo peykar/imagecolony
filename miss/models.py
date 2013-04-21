@@ -37,12 +37,11 @@ class Region(models.Model):
 
     user = models.ForeignKey(User)
     region = models.GeometryField(db_column='the_geom')
-    when_to_take = None
+    when_to_take = models.CharField('when to take imagery', max_length=255)
 
     priority = models.CharField(max_length=3, choices=PRIORITY_TYPES)
     imagery_type = models.CharField(max_length=3, choices=IMAGERY_TYPES)
     current_imagery_problem = models.CharField(max_length=3, choices=IMAGERY_PROBLEM_TYPES)
-    gained_vote = None
     objects = models.GeoManager()
 
 class Vote(models.Model):
