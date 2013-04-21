@@ -83,49 +83,51 @@
             <div class="container-fluid">
               <div class="row-fluid">
                 <button id="addFeature" class="btn btn-info btn-large span12">Select a point</button>
-                <table class="table span7 offset2">
+                <table class="table span8 offset2">
                   <tbody>
                     <tr>
-                      <td class="span3">lat:</td>
+                      <td class="span3">latitude:</td>
                       <td id="pointLat" class="span9"></td>
                     </tr>
                     <tr>
-                      <td>lon:</td>
-                      <td id="pointLon"></td>
+                      <td class="span3">longitude:</td>
+                      <td id="pointLon" class="span9"></td>
                     </tr>
                     <tr>
-                      <td>zoom:</td>
-                      <td id="zoomLevel"></td>
+                      <td class="span3">zoom:</td>
+                      <td id="zoomLevel" class="span9"></td>
                     </tr>
                   </tbody>
                 </table>
               </div>
               
-              <form action="" method="post">
+              <form action="imagecolony/region/add" method="post">
+                <div class="control-group">
+                  <label class="control-label" for="locationName">Location Name:</label>
+                  <input type="text" name="name" id="locationName" placeholder="optional">
+                </div>
+                
                 <div class="control-group">
                   <label class="control-label" for="applications">Application:</label>
                   <select name="application" id="applications">
                   </select>
                 </div>
+                
                 <div class="control-group">
-                  <label class="control-label" for="imageries">Imagery type:</label>
+                  <label class="control-label" for="imageries">Imagery Type:</label>
                   <select name="imagery" id="imageries">
                   </select>
                 </div>
+                
                 <div class="control-group">
-                  <label class="control-label" for="imagery_problems">Current imagery problem:</label>
+                  <label class="control-label" for="imagery_problems">Current Imagery Problem:</label>
                   <select name="imagery_problem" id="imagery_problems">
                   </select>
                 </div>
                 
                 <div class="control-group">
-                  <label class="control-label" for="captureTime">Appropriate capture time:</label>
+                  <label class="control-label" for="captureTime">Suggested Capture Time:</label>
                   <input type="text" name="appropriate_capture_time" id="captureTime" placeholder="e.g. 13:35">
-                </div>
-                
-                <div class="control-group">
-                  <label class="control-label" for="locationName">Location name:</label>
-                  <input type="text" name="name" id="locationName" placeholder="optional">
                 </div>
                   
                 <input type="hidden" name="point" id="point" value="">
