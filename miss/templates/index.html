@@ -83,19 +83,19 @@
             <div class="container-fluid">
               <div class="row-fluid">
                 <button id="addFeature" class="btn btn-info btn-large span12">Select a point</button>
-                <table class="table span8 offset2">
+                <table class="table table-striped span12">
+                  <thead>
+                    <tr>
+                      <th class="span4">latitude</th>
+                      <th class="span4">longitude</th>
+                      <th class="span4">zoom</th>
+                    </tr>
+                  </thead>
                   <tbody>
                     <tr>
-                      <td class="span3">latitude:</td>
-                      <td id="pointLat" class="span9"></td>
-                    </tr>
-                    <tr>
-                      <td class="span3">longitude:</td>
-                      <td id="pointLon" class="span9"></td>
-                    </tr>
-                    <tr>
-                      <td class="span3">zoom:</td>
-                      <td id="zoomLevel" class="span9"></td>
+                      <td id="pointLat"></td>
+                      <td id="pointLon"></td>
+                      <td id="zoomLevel"></td>
                     </tr>
                   </tbody>
                 </table>

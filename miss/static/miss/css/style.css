@@ -57,6 +57,10 @@ html, body { height: 100%; }
   .nav > li:hover, .nav > li:focus { background-color: #eee; }
 
   /* Add */
+  #add table {
+    margin: 10px 0 0;
+  }
+
   #add form {
     display: block;
     width: 220px;
