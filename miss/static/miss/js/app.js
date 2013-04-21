@@ -310,46 +310,39 @@ $(function() {
     controls.point.events.on({
       'featureadded': featureAdded
     });
-    publish(null);
+  });
+
+  $("#add form").on('submit', function(e) {
+    e.preventDefault();
+
+    var form = $(this);
+
+    // Disable the button to prevent multiple submits
+    var btn = form.find('button[type="submit"], button[type="reset"]');
+    btn.attr('disabled', 'disabled');
+    form.find('button[type="reset"]').before('<span class="loading"></span>');
+
+    $.ajax({
+      url: this.action,
+      dataType: 'json',
+      type: 'post',
+      data: $(this).serialize(),
+      success : function(data) {
+        if(data.success) {
+          show("success", "Imagery problem submitted successfully!");
+
+          form.get(0).reset();
+        } else {
+          show("error", data.message);
+        }
+      },
+      error : function() {
+        show("error", "An error occured! Please try again shortly.");
+      },
+      complete: function() {
+        btn.removeAttr('disabled');
+        form.find(".loading").remove();
+      }
+    });
   });
 });
-
-
-function publish(publish_url){
-    
-    if(!publish_url)
-        publish_url = "http://imagecolony.com";
-
-    template = "\
-            <div class=\"container-fluid\">\
-                <div class=\"control-group\">\
-                    <a href=\"https://twitter.com/intent/tweet?button_hashtag=imagecolony&url=PUBLISH_URL\" class=\"twitter-hashtag-button\" data-lang=\"en\" data-related=\"jasoncosta\">Tweet #imagecolony</a>\
-                    <script>\
-                        !function(d,s,id){\
-                            var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=\"https://platform.twitter.com/widgets.js\";\
-                            fjs.parentNode.insertBefore(js,fjs);}}(document,\"script\",\"twitter-wjs\");\
-                    </script>\
-                </div>\
-                <div class=\"control-group\">\
-                    <div id=\"fb-root\"></div>\
-                    <script>\
-                       (function(d, s, id){\
-                           var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) return;js = d.createElement(s); js.id = id;js.src = \"//connect.facebook.net/en_US/all.js#xfbml=1\";\
-                           fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));\
-                    </script>\
-                    <div class=\"fb-send\" data-href=\"PUBLISH_URL\"></div>\
-                </div>\
-                <div class=\"control-group\">\
-                    <div class=\"g-plus\" data-action=\"share\" data-annotation=\"none\" data-href=\"PUBLISH_URL\"></div>\
-                    <script type=\"text/javascript\">\
-                       (function() {\
-                           var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;\
-                           po.src = 'https://apis.google.com/js/plusone.js';\
-                           var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);\
-                        })();\
-                    </script>\
-                </div>\
-            </div>";
-
-    $('#social').html(template.replace("PUBLISH_URL", publish_url));
-}
