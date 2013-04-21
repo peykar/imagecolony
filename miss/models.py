@@ -48,4 +48,4 @@ class Vote(models.Model):
     user = models.ForeignKey(User)
     region = models.ForeignKey(Region)
     weight = models.IntegerField()
-    creation_time = models.DateTimeField('date voted', auto_now_add=True))
+    creation_time = models.DateTimeField('date voted', auto_now_add=True)
