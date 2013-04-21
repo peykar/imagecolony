@@ -39,11 +39,12 @@ class Region(models.Model):
     user = models.ForeignKey(User)
     name = models.CharField(max_length=255)
     region = models.PointField(db_column='the_geom')
-    when_to_take = models.CharField('when to take imagery', max_length=255)
+    when_to_capture = models.CharField('when to take imagery', max_length=255)
 
-    application = models.CharField(max_length=3, choices=APPLICATION_TYPES)
+    application_type = models.CharField(max_length=3, choices=APPLICATION_TYPES)
     imagery_type = models.CharField(max_length=3, choices=IMAGERY_TYPES)
-    current_imagery_problem = models.CharField(max_length=3, choices=IMAGERY_PROBLEM_TYPES)
+    imagery_problem_type = models.CharField(max_length=3, choices=IMAGERY_PROBLEM_TYPES)
+
     objects = models.GeoManager()
 
     def __unicode__(self):

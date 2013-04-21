@@ -5,6 +5,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.utils.translation import ugettext as _
 from django.shortcuts import render
 from django.db.models import Sum
+from django.contrib.gis.geos import GEOSGeometry
 
 from mission_earth.decorators import json_response
 from miss.models import Region, Vote 
@@ -30,6 +31,25 @@ def types_view(request):
         types = {}
 
     return {'success': True, 'types': types}
+
+@json_response(ajax_required=False, login_required=False)
+def point_view(request):
+    if request.method != 'POST' or 'wkt' not in request.POST:
+        return {'success': False, 'message': _("Invalid request")}
+
+    region = Region(
+        user=request.user,
+        name=request.POST.get('name',''),
+        region=GEOSGeometry(request.POST.get('wkt','')),
+        when_to_capture=request.POST.get('when_to_capture',''),
+        application_type=request.POST.get('application_type',''),
+        imagery_type=request.POST.get('imagery_type',''),
+        imagery_problem_type=request.POST.get('imagery_problem_type','')
+    )
+    region.save()
+
+    return {'success': False, 'message': _("Your reguested region submitted."), 'extra': {'id': region.id}}
+
 
 @json_response(ajax_required=False, login_required=False)
 def vote_view(request):
