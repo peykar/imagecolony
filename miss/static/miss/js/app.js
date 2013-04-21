@@ -4,7 +4,6 @@ var map;
 function init() {
     map = new OpenLayers.Map({
         div: "map",
-        allOverlays: true
     });
 
     var osm = new OpenLayers.Layer.OSM();
