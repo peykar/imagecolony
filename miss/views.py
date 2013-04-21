@@ -3,9 +3,13 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils.translation import ugettext as _
-
+from django.shortcuts import render
 
 from mission_earth.decorators import json_response
+
+def home(request):
+    context = {}
+    return render(request, 'index.html', context)
 
 @json_response(ajax_required=False, login_required=False)
 def login_view(request):

@@ -1,0 +1,185 @@
+{% load staticfiles %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>ImageColony</title>
+    
+    <meta charset="utf-8">
+    
+    <link rel="stylesheet" type="text/css" href="{% static "miss/css/bootstrap.min.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "miss/css/bootstrap-responsive.min.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "miss/css/style.css" %}">
+  </head>
+  <body>
+    <div id="header" class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <div class="brand">
+            Challenge
+          </div>
+          <ul class="nav pull-right">
+            <li><a href="{% static "#login" role="button" data-toggle="modal">Login</a></li>
+            <li><a href="{% static "#register" role="button" data-toggle="modal">Register</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <div class="container-custom">
+      <div id="sidebar">
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="{% static "#list" data-toggle="tab"><i class="icon-list"></i> List</a></li>
+          <li><a href="{% static "#add" data-toggle="tab"><i class="icon-plus"></i> Add</a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="list">
+            <ul class="nav nav-list">
+              <li class="nav-header">Category A</li>
+              <li class="clearfix">
+                <a href="{% static "#" class="vote-up"><i class="icon-chevron-up vote-up"></i></a>
+                <a href="{% static "#" class="vote-down"><i class="icon-chevron-down vote-down"></i></a>
+                <small class="score">(+12)</small>
+                <a href="{% static "#">Item 1</a>
+              </li>
+              <li class="clearfix">
+                <a href="{% static "#" class="vote-up"><i class="icon-chevron-up vote-up"></i></a>
+                <a href="{% static "#" class="vote-down"><i class="icon-chevron-down vote-down"></i></a>
+                <small class="score">(-5)</small>
+                <a href="{% static "#">Item 2</a>
+              </li>
+              <li class="clearfix">
+                <a href="{% static "#" class="vote-up"><i class="icon-chevron-up vote-up"></i></a>
+                <a href="{% static "#" class="vote-down"><i class="icon-chevron-down vote-down"></i></a>
+                <small class="score">(0)</small>
+                <a href="{% static "#">Item 3</a>
+              </li>
+              <li class="clearfix">
+                <a href="{% static "#" class="vote-up"><i class="icon-chevron-up vote-up"></i></a>
+                <a href="{% static "#" class="vote-down"><i class="icon-chevron-down vote-down"></i></a>
+                <small class="score">(+6)</small>
+                <a href="{% static "#">Item 4</a>
+              </li>
+              <li class="nav-header">Category B</li>
+              <li class="clearfix">
+                <a href="{% static "#" class="vote-up"><i class="icon-chevron-up vote-up"></i></a>
+                <a href="{% static "#" class="vote-down"><i class="icon-chevron-down vote-down"></i></a>
+                <small class="score">(+2)</small>
+                <a href="{% static "#">Item 1</a>
+              </li>
+              <li class="clearfix">
+                <a href="{% static "#" class="vote-up"><i class="icon-chevron-up vote-up"></i></a>
+                <a href="{% static "#" class="vote-down"><i class="icon-chevron-down vote-down"></i></a>
+                <small class="score">(-3)</small>
+                <a href="{% static "#">Item 2</a>
+              </li>
+            </ul>
+          </div>
+          <div class="tab-pane" id="add">
+            <div class="container-fluid">
+              <form action="" method="post">
+                <select name="select1">
+                  <option value="i1">Item 1</option>
+                  <option value="i2">Item 2</option>
+                </select>
+                <select name="select2">
+                  <option value="i1">Item 1</option>
+                  <option value="i2">Item 2</option>
+                </select>
+                <input type="text" name="inputtext" placeholder="Enter whatever it is">
+                
+                <div class="control-group">
+                  <div class="controls pull-right">
+                    <button type="reset" class="btn">Reset</button>
+                    <button type="submit" class="btn btn-primary">Add</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="map-container">
+        MAP
+      </div>
+    </div>
+    
+    <div id="footer" class="navbar navbar-fixed-bottom navbar-inverse">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <small class="copyright">&copy; 2013</small>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Modals -->
+    <div id="login" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <form action="login" method="post" class="form-horizontal">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 id="myModalLabel">Login</h3>
+        </div>
+        <div class="modal-body">
+          <div class="control-group">
+            <label class="control-label" for="loginUsername">Username</label>
+            <div class="controls">
+              <input type="text" name="username" id="loginUsername" placeholder="Username">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="loginPassword">Password</label>
+            <div class="controls">
+              <input type="password" name="password" id="loginPassword" placeholder="Password">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="reset" class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+          <button type="submit" class="btn btn-success">Login</button>
+        </div>
+      </form>
+    </div>
+    <div id="register" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <form action="register" method="post" class="form-horizontal">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 id="myModalLabel">Register</h3>
+        </div>
+        <div class="modal-body">
+          <div class="control-group">
+            <label class="control-label" for="regEmail">E-Mail address</label>
+            <div class="controls">
+              <input type="email" name="email" id="regEmail" placeholder="E-Mail">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="regUsername">Username</label>
+            <div class="controls">
+              <input type="text" name="username" id="regUsername" placeholder="Username">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="regPassword">Password</label>
+            <div class="controls">
+              <input type="password" name="password" id="regPassword" placeholder="Password">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="regCPassword">Confirm password</label>
+            <div class="controls">
+              <input type="password" name="confirm-password" id="regCPassword" placeholder="Confirm">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="reset" class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+          <button type="submit" class="btn btn-primary">Register</button>
+        </div>
+      </form>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="{% static "miss/js/jquery.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "miss/js/bootstrap.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "miss/js/app.js" %}" type="text/javascript"></script>
+  </body>
+</html>
