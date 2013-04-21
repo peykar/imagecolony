@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils.translation import ugettext as _
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.db.models import Sum
 from django.contrib.gis.geos import GEOSGeometry
 
@@ -15,12 +15,7 @@ def home(request):
     return render(request, 'index.html', context)
 
 @json_response(ajax_required=False, login_required=False)
-def types_view(request):
-    if request.REQUEST.get('type', None) is None:
-        return {'success': False, 'message': _("Invalid request")}
-
-    _type = request.REQUEST['type'].lower()
-
+def types_view(request, _type):
     if _type == 'application':
         types = Region.APPLICATION_TYPES
     elif _type == 'imagery':
@@ -33,7 +28,7 @@ def types_view(request):
     return {'success': True, 'types': types}
 
 @json_response(ajax_required=False, login_required=False)
-def point_view(request):
+def add_region_view(request):
     if request.method != 'POST' or 'wkt' not in request.POST:
         return {'success': False, 'message': _("Invalid request")}
 
@@ -50,15 +45,25 @@ def point_view(request):
 
     return {'success': False, 'message': _("Your reguested region submitted."), 'extra': {'id': region.id}}
 
+def support_aim_view(request, region_id):
+    region = get_object_or_404(Region, pk=region_id)
+
+    region.vote_set.create(user=request.user, weight=1)    
+    context = {
+        'zoom_to_point': region.region.wkt,
+        'message': _("You've just up-voted your friend's aim! Your are AWESOME!")
+    }
+    return render(request, 'index.html', context)
+
 
 @json_response(ajax_required=False, login_required=False)
-def vote_view(request):
+def add_vote_view(request):
     if request.REQUEST.get('vote', None) not in ('up', 'down') \
         or request.REQUEST.get('region_id', None) is None:
         return {'success': False, 'message': _("Invalid request")}
 
     value = 1 if request.REUQEST['vote'] == 'up' else -1
-    # TODO: make it happen
+
     try:
         region = Region.objects.get(pk=region_id)
     except Region.DoesNotExist:
