@@ -1,5 +1,6 @@
 var bing_apiKey = "AqTGBsziZHIJYYxgivLBf0hVdrAk9mWO5cQcb8Yux8sW5M8c8opEC2lZqKR1ZZXf";
 var map, layers, controls;
+var max_ajax_attempts = 3;
 
 function init() {
   map = new OpenLayers.Map({
@@ -14,14 +15,15 @@ function init() {
         name: "Bing Aerial",
         key: bing_apiKey,
         type: "Aerial"
-    })
+    }),
+    vectorLayer: new OpenLayers.Layer.Vector("Vector Layer")
   }
   var layersArray = toArray(layers);
 
   // Controls
   controls = {
     layerSwitcher: new OpenLayers.Control.LayerSwitcher(),
-    point: new OpenLayers.Control.DrawFeature(layersArray, OpenLayers.Handler.Point)
+    point: new OpenLayers.Control.DrawFeature(layers.vectorLayer, OpenLayers.Handler.Point)
   }
   var controlsArray = toArray(controls);
 
@@ -47,6 +49,49 @@ function show(type, m) {
   setTimeout(function() {
     $(this).alert('close');
   }.bind(dom), 8000);
+}
+
+// Handle point selection on map
+function featureAdded(e) {
+  controls.point.deactivate();
+
+  var point  = e.feature.geometry.toString();
+  var bounds = e.feature.geometry.bounds;
+
+  $("#pointLat").text(e.feature.geometry.x);
+  $("#pointLon").text(e.feature.geometry.y);
+  $("#zoomLevel").text(e.feature.layer.map.zoom);
+
+  $("#point").val(point);
+}
+
+// Get dropdown items
+function getTypes(subject, attempts) {
+  attemps = attemps || 0;
+
+  var dom = $("#" + subject);
+  dom.attr('disabled', 'disabled');
+
+  $.ajax({
+    url: '/imagecolony/miss/' + subject,
+    type: 'post',
+    dataType: 'json',
+    success: function(data) {
+      var types = data.types;
+      for(var i in types) {
+        $('<option value="' + types[i][0] + '">' + types[i][1] + '</option>').appendTo(dom);
+      }
+
+      dom.removeAttr('disabled')
+    },
+    error: function() {
+      if(attemps < max_ajax_attempts) {
+        getTypes(subject, attempts + 1);
+      } else {
+        show("error", "Error loading! Please try again in a minute.");
+      }
+    }
+  });
 }
 
 // Authentication
@@ -113,7 +158,6 @@ var authentication = {
     });
   }
 };
-
 
 // Authentication
 $(function() {
@@ -255,7 +299,16 @@ $(function() {
 
 // Do
 $(function() {
-  $('a[href="#add"][data-toggle="tab"]').on('show', function(e) {
+  getTypes("applications");
+  getTypes("imageries");
+  getTypes("imagery_problems");
+
+  $('#addFeature').on('click', function(e) {
+    e.preventDefault();
+
     controls.point.activate();
+    controls.point.events.on({
+      'featureadded': featureAdded
+    });
   });
 });
