@@ -14,6 +14,11 @@ framework.
 
 """
 import os
+import sys
+
+wsgi_conf_file = os.path.dirname(__file__)
+project = os.path.dirname(wsgi_conf_file)
+sys.path.append(project) 
 
 # We defer to a DJANGO_SETTINGS_MODULE already in the environment. This breaks
 # if running multiple sites in the same mod_wsgi process. To fix this, use
