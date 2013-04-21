@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils.translation import ugettext as _
 from django.shortcuts import render
+from django.db.models import Sum
 
 from mission_earth.decorators import json_response
 from miss.models import Region, Vote 
@@ -29,6 +30,27 @@ def types_view(request):
         types = {}
 
     return {'success': True, 'types': types}
+
+@json_response(ajax_required=False, login_required=False)
+def vote_view(request):
+    if request.REQUEST.get('vote', None) not in ('up', 'down') \
+        or request.REQUEST.get('region_id', None) is None:
+        return {'success': False, 'message': _("Invalid request")}
+
+    value = 1 if request.REUQEST['vote'] == 'up' else -1
+    # TODO: make it happen
+    try:
+        region = Region.objects.get(pk=region_id)
+    except Region.DoesNotExist:
+        return {'success': False, 'message': _("Invalid request")}
+
+    region.vote_set.create(user=request.user, weight=value)    
+
+    current_vote = region.vote_set.aggregate(Sum('weight'))
+    if current_vote is None:
+        current_vote = 0
+
+    return {'success': True, 'current_vote_value': current_vote}
 
 @json_response(ajax_required=False, login_required=False)
 def login_view(request):
