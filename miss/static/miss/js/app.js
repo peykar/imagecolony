@@ -331,7 +331,7 @@ $(function() {
       success : function(data) {
         if(data.success) {
           show("success", "Imagery problem submitted successfully!");
-
+          $("#shareAim").fadeIn();
           form.get(0).reset();
         } else {
           show("error", data.message);
