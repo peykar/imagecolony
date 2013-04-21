@@ -2,6 +2,7 @@ var bing_apiKey = "AqTGBsziZHIJYYxgivLBf0hVdrAk9mWO5cQcb8Yux8sW5M8c8opEC2lZqKR1Z
 var map, layers, controls;
 var max_ajax_attempts = 3;
 
+// Initialize the map
 function init() {
   map = new OpenLayers.Map({
       div: "map",
