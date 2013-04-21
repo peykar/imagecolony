@@ -29,37 +29,41 @@ html, body { height: 100%; }
           box-sizing: border-box;
 }
 
+/* Sidebar */
 .nav-tabs { padding: 0 5px; }
 .nav-tabs > li > a {
   border-radius: 0;
   color: #555;
 }
 
-.nav-list > li {
-  display: block;
-  margin-right: -15px;
-  margin-left: -15px;
-  padding: 0 15px;
-}
-.nav-list > li > a {
-  float: left;
-  padding: 3px 15px;
-}
-.nav-list > li > .score {
-  float: left;
-  padding: 3px 8px 3px 0;
-}
+  /* List */
+  .nav-list > li {
+    display: block;
+    margin-right: -15px;
+    margin-left: -15px;
+    padding: 0 15px;
+  }
+  .nav-list > li > a {
+    float: left;
+    padding: 3px 15px;
+  }
+  .nav-list > li > .score {
+    float: left;
+    padding: 3px 8px 3px 0;
+  }
 
-.nav > li > a:hover, .nav > li > a:focus,
-.nav > li.nav-header:hover, .nav > li.nav-header:focus { background-color: transparent; }
-.nav > li:hover, .nav > li:focus { background-color: #eee; }
+  .nav > li > a:hover, .nav > li > a:focus,
+  .nav > li.nav-header:hover, .nav > li.nav-header:focus { background-color: transparent; }
+  .nav > li:hover, .nav > li:focus { background-color: #eee; }
 
-#add form {
-  display: block;
-  width: 220px;
-  margin: 30px auto;
-}
+  /* Add */
+  #add form {
+    display: block;
+    width: 220px;
+    margin: 30px auto;
+  }
 
+/* Footer */
 #footer .navbar-inner {
   min-height: 25px;
   line-height: 25px;
@@ -70,4 +74,12 @@ html, body { height: 100%; }
   font-size: 75%;
 }
 
+/* Modals */
 .modal > form { margin-bottom: 0; }
+
+
+/* Assets */
+.loading {
+  padding: 0 10px;
+  background: transparent url("../images/loading.gif") no-repeat center center;
+}

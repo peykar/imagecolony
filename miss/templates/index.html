@@ -18,8 +18,9 @@
             ImageColony
           </div>
           <ul class="nav pull-right">
-            <li><a href="#login" role="button" data-toggle="modal">Login</a></li>
-            <li><a href="#register" role="button" data-toggle="modal">Register</a></li>
+            <li id="loginButton"><a href="#login" role="button" data-toggle="modal">Login</a></li>
+            <li id="registerButton"><a href="#register" role="button" data-toggle="modal">Register</a></li>
+            <li id="logoutButton" style="display:none;"><a href="miss/logout" id="logout"><span id="username"></span> (Logout)</a></li>
           </ul>
         </div>
       </div>
@@ -112,7 +113,7 @@
     
     <!-- Modals -->
     <div id="login" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <form action="login" method="post" class="form-horizontal">
+      <form action="miss/login" method="post" class="form-horizontal">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
           <h3 id="myModalLabel">Login</h3>
@@ -138,7 +139,7 @@
       </form>
     </div>
     <div id="register" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <form action="register" method="post" class="form-horizontal">
+      <form action="miss/register" method="post" class="form-horizontal">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
           <h3 id="myModalLabel">Register</h3>
