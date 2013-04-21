@@ -165,3 +165,9 @@ TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
     'django.core.context_processors.request',
 )
 
+#########################
+twitter_consumer_key = ""
+twitter_consumer_secret = ""
+twitter_access_key = ""
+twitter_access_secret = ""
+
