@@ -28,6 +28,25 @@ def types_view(request, _type):
     return {'success': True, 'types': types}
 
 @json_response(ajax_required=False, login_required=False)
+def regions_view(request):
+    if request.method != 'POST' or 'wkt' not in request.POST:
+        return {'success': False, 'message': _("Invalid request")}
+
+    regions = Region.objects.filter(region__within(request.POST.get('wkt')))[:50]
+    result = []
+    for region in regions:
+        result.append({'name': region.name,
+            'region': region.region.wkt,
+            'current_vote': region.vote_set.aggregate(Sum('weight')),
+            'when_to_capture': region.when_to_capture,
+            'application_type': region.application_type,
+            'imagery_type': region.imagery_type,
+            'imagery_problem_type': region.imagery_type,
+        })
+    return {'success': False, 'regions': regions}
+
+
+@json_response(ajax_required=False, login_required=False)
 def add_region_view(request):
     if request.method != 'POST' or 'wkt' not in request.POST:
         return {'success': False, 'message': _("Invalid request")}
