@@ -81,7 +81,7 @@ html, body { height: 100%; }
 /* Assets */
 .loading {
   padding: 0 10px;
-  background: transparent url("../images/loading.gif") no-repeat center center;
+  background: transparent url("../img/loading.gif") no-repeat center center;
 }
 
 .alert-floating {
