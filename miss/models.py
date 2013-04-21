@@ -17,19 +17,19 @@ class UserProfile(models.Model):
         return self.user.get_full_name() or self.user.username
 
 class Region(models.Model):
-    PRIORITIY_TPYES = (
+    PRIORITY_TYPES = (
         ('aaa', 'First Priority'),
         ('bbb', 'Second Priority'),
         ('ccc', 'Third Priority'),
     )
 
-    IMAGERY_TPYES = (
+    IMAGERY_TYPES = (
         ('aaa', 'First IMAGERY'),
         ('bbb', 'Second IMAGERY'),
         ('ccc', 'Third IMAGERY'),
     )
 
-    IMAGERY_PROBLEM_TPYES = (
+    IMAGERY_PROBLEM_TYPES = (
         ('aaa', 'First Problem'),
         ('bbb', 'Second Problem'),
         ('ccc', 'Third Problem'),
