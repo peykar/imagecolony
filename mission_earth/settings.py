@@ -1,4 +1,5 @@
 # Django settings for mission_earth project.
+from django.conf import global_settings
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -159,6 +160,7 @@ LOGGING = {
     }
 }
 
+AUTH_PROFILE_MODULE = 'miss.models.UserProfile'
 TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
     'django.core.context_processors.request',
 )
