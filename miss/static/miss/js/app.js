@@ -97,6 +97,8 @@ var authentication = {
   }
 };
 
+
+// Do
 $(function() {
   authentication.check();
   $("#logout").click(function(e) {
@@ -223,7 +225,7 @@ $(function() {
         form.find(".loading").remove();
       },
       error : function() {
-        show("erroe", "An error occured! Please try again shortly."));
+        show("error", "An error occured! Please try again shortly.");
       },
       complete: function() {
         btn.removeAttr('disabled');
