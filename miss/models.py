@@ -36,7 +36,7 @@ class Region(models.Model):
     )
 
     user = models.ForeignKey(User)
-    region = models.GeometryField(db_column='the_geom')
+    region = models.PointField(db_column='the_geom')
     when_to_take = models.CharField('when to take imagery', max_length=255)
 
     priority = models.CharField(max_length=3, choices=PRIORITY_TYPES)
