@@ -17,7 +17,7 @@ class UserProfile(models.Model):
         return self.user.get_full_name() or self.user.username
 
 class Region(models.Model):
-    APPLICATION_TYPES = ( # Applicatoin
+    APPLICATION_TYPES = (
         ('aaa', 'First Priority'),
         ('bbb', 'Second Priority'),
         ('ccc', 'Third Priority'),
