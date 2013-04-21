@@ -6,10 +6,29 @@ from django.utils.translation import ugettext as _
 from django.shortcuts import render
 
 from mission_earth.decorators import json_response
+from miss.models import Region, Vote 
 
 def home(request):
     context = {}
     return render(request, 'index.html', context)
+
+@json_response(ajax_required=False, login_required=False)
+def types_view(request):
+    if request.REQUEST.get('type', None) is None:
+        return {'success': False, 'message': _("Invalid request")}
+
+    _type = request.REQUEST['type'].lower()
+
+    if _type == 'priority':
+        types = Region.PRIORITY_TYPES
+    elif _type == 'imagery':
+        types = Region.IMAGERY_TYPES
+    elif _type == 'imagery_problem':
+        types = Region.IMAGERY_PROBLEM_TYPES 
+    else:
+        types = {}
+
+    return {'success': True, 'types': types}
 
 @json_response(ajax_required=False, login_required=False)
 def login_view(request):
