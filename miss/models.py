@@ -17,7 +17,7 @@ class UserProfile(models.Model):
         return self.user.get_full_name() or self.user.username
 
 class Region(models.Model):
-    PRIORITY_TYPES = (
+    APPLICATION_TYPES = ( # Applicatoin
         ('aaa', 'First Priority'),
         ('bbb', 'Second Priority'),
         ('ccc', 'Third Priority'),
@@ -30,12 +30,14 @@ class Region(models.Model):
     )
 
     IMAGERY_PROBLEM_TYPES = (
-        ('aaa', 'First Problem'),
-        ('bbb', 'Second Problem'),
-        ('ccc', 'Third Problem'),
+        ('noi', 'No Imagery'),
+        ('cld', 'Cloudy Image'),
+        ('low', 'Low Resolution Image'),
+        ('old', 'Old Imagery'),
     )
 
     user = models.ForeignKey(User)
+    name = models.CharField(max_length=255)
     region = models.PointField(db_column='the_geom')
     when_to_take = models.CharField('when to take imagery', max_length=255)
 

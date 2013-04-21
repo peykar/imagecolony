@@ -20,8 +20,8 @@ def types_view(request):
 
     _type = request.REQUEST['type'].lower()
 
-    if _type == 'priority':
-        types = Region.PRIORITY_TYPES
+    if _type == 'application':
+        types = Region.APPLICATION_TYPES
     elif _type == 'imagery':
         types = Region.IMAGERY_TYPES
     elif _type == 'imagery_problem':
