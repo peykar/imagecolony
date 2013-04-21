@@ -31,9 +31,9 @@ class Region(models.Model):
     )
 
     IMAGERY_TYPES = (
-        ('vis', 'Visible'),
-        ('inf', 'Infrared'),
-        ('wat', 'Water vapor'),
+        ('vis', 'Visible'),
+        ('inf', 'Infrared'),
+        ('wat', 'Water vapor'),
     )
 
     IMAGERY_PROBLEM_TYPES = (
