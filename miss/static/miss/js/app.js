@@ -6,7 +6,6 @@ function init() {
         div: "map",
     });
 
-    var osm = new OpenLayers.Layer.OSM();
     var google_roadmap = new OpenLayers.Layer.Google("Google Roadmap", {type: google.maps.MapTypeId.ROADMAP});
     var google_satellite = new OpenLayers.Layer.Google("Google Satellite", {type: google.maps.MapTypeId.SATELLITE});
     var bing_aerial = new OpenLayers.Layer.Bing({
@@ -16,7 +15,7 @@ function init() {
     });
 
     // note that first layer must be visible
-    map.addLayers([osm, google_satellite, bing_aerial]);
+    map.addLayers([google_satellite, bing_aerial]);
 
     map.addControl(new OpenLayers.Control.LayerSwitcher());
     map.zoomToMaxExtent();
