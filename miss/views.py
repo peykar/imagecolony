@@ -62,7 +62,7 @@ def add_region_view(request):
     )
     region.save()
 
-    return {'success': False, 'message': _("Your reguested region submitted."), 'extra': {'id': region.id}}
+    return {'success': True, 'message': _("Your reguested region submitted."), 'extra': {'id': region.id}}
 
 def support_aim_view(request, region_id):
     region = get_object_or_404(Region, pk=region_id)
