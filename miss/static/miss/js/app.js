@@ -46,7 +46,7 @@ var authentication = {
 
   _isLoggedIn: function(callback) {
     $.ajax({
-      url   : 'miss/user_info',
+      url   : '/imagecolony/miss/user_info',
       dataType: 'json',
       type  : 'post',
       success : function(data) {
@@ -73,7 +73,7 @@ var authentication = {
 
   login: function(username, password, success, error) {
     $.ajax({
-      url   : 'miss/login',
+      url   : '/imagecolony/miss/login',
       dataType: 'json',
       type  : 'post',
       data  : "username="+username+"&password="+password,
@@ -85,7 +85,7 @@ var authentication = {
 
   logout: function() {
     $.ajax({
-      url   : 'miss/logout',
+      url   : '/imagecolony/miss/logout',
       dataType: 'json',
       type  : 'post',
       success : function(data) {
