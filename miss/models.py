@@ -44,6 +44,9 @@ class Region(models.Model):
     current_imagery_problem = models.CharField(max_length=3, choices=IMAGERY_PROBLEM_TYPES)
     objects = models.GeoManager()
 
+    def __unicode__(self):
+        self.region
+
 class Vote(models.Model):
     user = models.ForeignKey(User)
     region = models.ForeignKey(Region)
