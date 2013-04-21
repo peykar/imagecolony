@@ -27,7 +27,9 @@ function init() {
 
 // Show messages
 function show(type, m) {
-  alert(type+"!!\n"+m);
+  var dom = '<div class="alert alert-floating alert-' + type + ' fade in"><button type="button" class="close" data-dismiss="alert">&times;</button>' + m + '</div>';
+  $(dom).appendTo('body');
+  $(".alert").alert();
 }
 
 // Authentication

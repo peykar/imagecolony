@@ -83,3 +83,13 @@ html, body { height: 100%; }
   padding: 0 10px;
   background: transparent url("../images/loading.gif") no-repeat center center;
 }
+
+.alert-floating {
+  position: absolute;
+  display: block;
+  width: 700px;
+  top: 10px;
+  left: 50%;
+  margin-left: -350px;
+  z-index: 99999;
+}
