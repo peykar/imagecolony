@@ -1,6 +1,6 @@
 # Create your views here.
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login, logout, get_user
+from django.contrib.auth import authenticate, login, logout
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils.translation import ugettext as _
 from django.shortcuts import render, get_object_or_404
@@ -46,13 +46,13 @@ def regions_view(request):
     return {'success': False, 'regions': regions}
 
 
-@json_response(ajax_required=False, login_required=False)
+@json_response(ajax_required=False, login_required=True)
 def add_region_view(request):
     if request.method != 'POST' or 'point' not in request.POST:
         return {'success': False, 'message': _("Invalid request")}
 
     region = Region(
-        user=get_user(request.user),
+        user=User.objects.get(username = request.user),
         name=request.POST.get('name',''),
         region=GEOSGeometry(request.POST.get('point','')),
         when_to_capture=request.POST.get('appropriate_capture_time',''),
