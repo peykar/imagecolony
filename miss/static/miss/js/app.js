@@ -14,9 +14,10 @@ function init() {
         key: bing_apiKey,
         type: "Aerial"
     });
+    var yahoo_satellite = new OpenLayers.Layer.Yahoo("Yahoo Satellite", {type: YAHOO_MAP_SAT});
 
     // note that first layer must be visible
-    map.addLayers([osm, google_satellite, bing_aerial]);
+    map.addLayers([osm, google_satellite, bing_aerial, yahoo_satellite]);
 
     map.addControl(new OpenLayers.Control.LayerSwitcher());
     map.zoomToMaxExtent();
