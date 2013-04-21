@@ -67,7 +67,7 @@ function featureAdded(e) {
 
 // Get dropdown items
 function getTypes(subject, attempts) {
-  attemps = attemps || 0;
+  attempts = attempts || 0;
 
   var dom = $("#" + subject);
   dom.attr('disabled', 'disabled');
@@ -85,7 +85,7 @@ function getTypes(subject, attempts) {
       dom.removeAttr('disabled')
     },
     error: function() {
-      if(attemps < max_ajax_attempts) {
+      if(attempts < max_ajax_attempts) {
         getTypes(subject, attempts + 1);
       } else {
         show("error", "Error loading! Please try again in a minute.");
