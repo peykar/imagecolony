@@ -10,6 +10,8 @@ from django.contrib.gis.geos import GEOSGeometry
 from mission_earth.decorators import json_response
 from miss.models import Region, Vote 
 
+from miss.lib.send_mail import send_registration_notif
+
 def home(request):
     context = {}
     return render(request, 'index.html', context)
@@ -153,6 +155,10 @@ def register_view(request):
         email = email 
     )
     user.save()
+    try:
+        send_registration_notif(username, email)
+    except:
+        pass
 
     return {'success': True, 'message': _("User registered successfully.")}
 
