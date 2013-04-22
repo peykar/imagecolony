@@ -122,7 +122,7 @@ function getList(limit, attempts) {
              dom = $("#list .nav-list");
 
         for(var i in list) {
-          $('<li class="clearfix" data-region="' + list[i].region + '" data-region-id="' + list[i].region_id + '"><a href="imagecolony/miss/vote/up/' + list[i].region_id + '" class="vote-up"><i class="icon-chevron-up vote-up"></i></a><a href="imagecolony/miss/vote/down/' + list[i].region_id + '" class="vote-down"><i class="icon-chevron-down vote-down"></i></a><small class="score">(' + list[i].current_vote + ')</small><a href="#">' + list[i].name + '</a></li>').appendTo(dom);
+          $('<li class="clearfix" data-region="' + list[i].region + '" data-region-id="' + list[i].region_id + '"><a href="imagecolony/miss/vote/up/' + list[i].region_id + '" class="vote-up"><i class="icon-chevron-up"></i></a><a href="imagecolony/miss/vote/down/' + (list[i].region_id || "-") + '" class="vote-down"><i class="icon-chevron-down"></i></a><small class="score">(' + list[i].current_vote + ')</small><a href="#">' + list[i].name + '</a></li>').appendTo(dom);
         }
 
         dom.find(".vote-up, .vote-down").on('click', function(e) {
@@ -134,11 +134,11 @@ function getList(limit, attempts) {
             success: function(data) {
               if(data.success) {
                 show("success", "Your vote has been successfully submitted!");
-                $(".score", this).text("(" + data.current_vote + ")");
+                $(this).siblings(".score").text("(" + data.current_vote + ")");
               } else {
                 show("error", data.message);
               }
-            }.bind(item),
+            }.bind(this),
             error: function() {
               show("error", "Error voting! Try again shortly.");
             }
