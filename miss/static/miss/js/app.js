@@ -363,8 +363,8 @@ $(function() {
 
 // Do
 $(function() {
+  init();
   getList();
-
   getTypes("applications");
   getTypes("imageries");
   getTypes("imagery_problems");
