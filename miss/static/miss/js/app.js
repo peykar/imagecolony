@@ -4,6 +4,8 @@ var max_ajax_attempts = 3;
 
 // Initialize the map
 function init() {
+  redrawContainer();
+
   map = new OpenLayers.Map({
       div: "map",
   });
@@ -34,6 +36,14 @@ function init() {
 
   map.zoomToMaxExtent();
 }
+
+// Redraw container
+function redrawContainer() {
+  $(".container-custom").css("height", $('body').innerHeight() - $("#header").outerHeight() - $("#topPanel").outerHeight() - $("#footer").outerHeight() + 5);
+  $(".tab-content").css("height", $("#sidebar").innerHeight() - $(".nav-tabs").outerHeight());
+}
+
+$(window).on('resize', redrawContainer);
 
 // cast object to array
 function toArray(obj) {
@@ -83,11 +93,64 @@ function getTypes(subject, attempts) {
         $('<option value="' + types[i][0] + '">' + types[i][1] + '</option>').appendTo(dom);
       }
 
-      dom.removeAttr('disabled')
+      dom.removeAttr('disabled');
     },
     error: function() {
       if(attempts < max_ajax_attempts) {
         getTypes(subject, attempts + 1);
+      } else {
+        show("error", "Error loading! Please try again in a minute.");
+      }
+    }
+  });
+}
+
+// Get locations list
+function getList(limit, attempts) {
+  limit = limit || 20;
+
+  var wkt =  map.getExtent().toGeometry().toString();
+
+  $.ajax({
+    url: 'imagecolony/miss/region/list',
+    type: 'post',
+    dataType: 'json',
+    data: "limit=" + limit + "&wkt=" + wkt,
+    success: function(data) {
+      if(data.success) {
+        var list = data.regions,
+             dom = $("#list .nav-list");
+
+        for(var i in list) {
+          $('<li class="clearfix" data-region="' + list[i].region + '" data-region-id="' + list[i].region_id + '"><a href="imagecolony/miss/vote/up/' + list[i].region_id + '" class="vote-up"><i class="icon-chevron-up vote-up"></i></a><a href="imagecolony/miss/vote/down/' + list[i].region_id + '" class="vote-down"><i class="icon-chevron-down vote-down"></i></a><small class="score">(' + list[i].current_vote + ')</small><a href="#">' + list[i].name + '</a></li>').appendTo(dom);
+        }
+
+        dom.find(".vote-up, .vote-down").on('click', function(e) {
+          e.preventDefault();
+          $.ajax({
+            url: this.href,
+            type: 'post',
+            dataType: 'json',
+            success: function(data) {
+              if(data.success) {
+                show("success", "Your vote has been successfully submitted!");
+                $(".score", this).text("(" + data.current_vote + ")");
+              } else {
+                show("error", data.message);
+              }
+            }.bind(item),
+            error: function() {
+              show("error", "Error voting! Try again shortly.");
+            }
+          });
+        });
+      } else {
+        show("error", data.message);
+      }
+    },
+    error: function() {
+      if(attempts < max_ajax_attempts) {
+        getList(limit, attempts + 1);
       } else {
         show("error", "Error loading! Please try again in a minute.");
       }
@@ -300,6 +363,8 @@ $(function() {
 
 // Do
 $(function() {
+  getList();
+
   getTypes("applications");
   getTypes("imageries");
   getTypes("imagery_problems");

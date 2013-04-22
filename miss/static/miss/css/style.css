@@ -60,6 +60,10 @@ html, body {
 }
 
 .tab-pane { position: relative; }
+.tab-content {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
 
   /* List */
   .nav-list > li {
