@@ -32,7 +32,8 @@ def regions_view(request):
     if request.method != 'POST' or 'wkt' not in request.POST:
         return {'success': False, 'message': _("Invalid request")}
 
-    regions = Region.objects.filter(region__within(request.POST.get('wkt')))[:50]
+    limit = request.POST.get('limit', 15)
+    regions = Region.objects.filter(region__within(request.POST.get('wkt')))[:limit]
     result = []
     for region in regions:
         result.append({'name': region.name,
