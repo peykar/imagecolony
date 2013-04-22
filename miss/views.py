@@ -86,7 +86,7 @@ def support_aim_view(request, region_id):
 
 @json_response(ajax_required=False, login_required=False)
 def add_vote_view(request, region_id, vote):
-    value = 1 if request.REUQEST['vote'] == 'up' else -1
+    value = 1 if vote == 'up' else -1
 
     try:
         region = Region.objects.get(pk=region_id)
