@@ -307,6 +307,7 @@ $(function() {
   $('#addFeature').on('click', function(e) {
     e.preventDefault();
 
+    layers.vectorLayer.removeAllFeatures()
     controls.point.activate();
     controls.point.events.on({
       'featureadded': featureAdded
@@ -333,6 +334,7 @@ $(function() {
           show("success", "Imagery problem submitted successfully!");
           $("#shareAim").fadeIn();
           form.get(0).reset();
+          layers.vectorLayer.removeAllFeatures();
         } else {
           show("error", data.message);
         }
