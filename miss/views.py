@@ -39,6 +39,7 @@ def regions_view(request):
     result = []
     for region in regions:
         result.append({'name': region.name,
+            'region_id': region.id,
             'region': region.region.wkt,
             'current_vote': region.vote_set.aggregate(Sum('weight')),
             'when_to_capture': region.when_to_capture,

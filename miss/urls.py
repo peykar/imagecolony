@@ -17,4 +17,5 @@ urlpatterns = patterns('',
     url(r'^vote/up/(?P<region_id>\d+)$', views.add_vote_view, {'vote': 'up'}, name='add_up_vote'),
     url(r'^vote/down/(?P<region_id>\d+)$', views.add_vote_view, {'vote': 'down'}, name='add_down_vote'),
     url(r'^aim/support/(?P<region_id>\d+)$', views.support_aim_view, name='support_aim'),
+    url(r'^region/list$', views.regions_view, name='regions'),
 )
