@@ -35,7 +35,7 @@ def regions_view(request):
         return {'success': False, 'message': _("Invalid request")}
 
     limit = request.POST.get('limit', 15)
-    regions = Region.objects.filter(region__within(request.POST.get('wkt')))[:limit]
+    regions = Region.objects.filter(region__within=request.POST.get('wkt'))[:limit]
     result = []
     for region in regions:
         result.append({'name': region.name,
