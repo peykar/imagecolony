@@ -122,10 +122,10 @@ function getList(limit, attempts) {
              dom = $("#list .nav-list");
 
         for(var i in list) {
-          $('<li class="clearfix" data-region="' + list[i].region + '" data-region-id="' + list[i].region_id + '"><a href="imagecolony/miss/vote/up/' + list[i].region_id + '" class="vote-up"><i class="icon-chevron-up"></i></a><small class="score">(' + list[i].current_vote + ')</small><a href="#">' + list[i].name + '</a></li>').appendTo(dom);
+          $('<li class="clearfix" data-region="' + list[i].region + '" data-region-id="' + list[i].region_id + '"><a href="imagecolony/miss/vote/up/' + list[i].region_id + '" class="vote-up"><i class="icon-chevron-up"></i></a><a href="imagecolony/miss/vote/down/' + (list[i].region_id || "-") + '" class="vote-down"><i class="icon-chevron-down"></i></a><small class="score">(' + list[i].current_vote + ')</small><a href="#">' + list[i].name + '</a></li>').appendTo(dom);
         }
 
-        dom.find(".vote-up").on('click', function(e) {
+        dom.find(".vote-up, .vote-down").on('click', function(e) {
           e.preventDefault();
           $.ajax({
             url: this.href,
