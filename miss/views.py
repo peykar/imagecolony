@@ -38,10 +38,13 @@ def regions_view(request):
     regions = Region.objects.filter(region__within=request.POST.get('wkt'))[:limit]
     result = []
     for region in regions:
+        current_vote = region.vote_set.aggregate(Sum('weight'))['weight__sum']
+        if current_vote is None:
+            current_vote = 0
         result.append({'name': region.name,
             'region_id': region.id,
             'region': region.region.wkt,
-            'current_vote': region.vote_set.aggregate(Sum('weight'))['weight__sum'],
+            'current_vote': current_vote,
             'when_to_capture': region.when_to_capture,
             'application_type': region.application_type,
             'imagery_type': region.imagery_type,
@@ -65,6 +68,8 @@ def add_region_view(request):
         imagery_problem_type=request.POST.get('imagery_problem','')
     )
     region.save()
+
+    region.vote_set.create(user=request.user, weight=1)    
 
     return {'success': True, 'message': _("Your reguested region submitted."), 'extra': {'id': region.id}}
 
