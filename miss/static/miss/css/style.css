@@ -1,8 +1,29 @@
-html, body { height: 100%; }
+html, body {
+  position: relative;
+  height: 100%;
+}
 
 /* Header */
-.brand { font-weight: 300; }
+.brand { font-weight: 300 !important; }
 .brand small { font-size: 60%; }
+
+#topPanel {
+  position: fixed;
+  width: 100%;
+  height: 50px;
+  padding: 20px 30px;
+  top: 40px;
+  background: #f7f7f7;
+  border-bottom: 1px solid #d5d5d5;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, .1);
+  z-index: 1029;
+}
+#topPanel h3 {
+  margin: 0;
+  font-weight: 300;
+  line-height: 1.2;
+}
+#topPanel p { font-weight: 300; }
 
 /* Body */
 .container-custom {
@@ -39,6 +60,7 @@ html, body { height: 100%; }
 .nav-tabs > li > a {
   border-radius: 0;
   color: #555;
+  font-weight: bold;
 }
 
 .tab-pane { position: relative; }
@@ -105,10 +127,10 @@ html, body { height: 100%; }
 }
 
 .alert-floating {
-  position: absolute;
+  position: fixed;
   display: block;
   width: 700px;
-  top: 10px;
+  top: 65px;
   left: 50%;
   margin-left: -350px;
   z-index: 99999;
