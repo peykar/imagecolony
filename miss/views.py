@@ -47,7 +47,7 @@ def regions_view(request):
             'imagery_type': region.imagery_type,
             'imagery_problem_type': region.imagery_type,
         })
-    return {'success': False, 'regions': results}
+    return {'success': False, 'regions': result}
 
 
 @json_response(ajax_required=False, login_required=True)
