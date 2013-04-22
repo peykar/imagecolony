@@ -41,13 +41,13 @@ def regions_view(request):
         result.append({'name': region.name,
             'region_id': region.id,
             'region': region.region.wkt,
-            'current_vote': region.vote_set.aggregate(Sum('weight')),
+            'current_vote': region.vote_set.aggregate(Sum('weight'))['weight__sum'],
             'when_to_capture': region.when_to_capture,
             'application_type': region.application_type,
             'imagery_type': region.imagery_type,
             'imagery_problem_type': region.imagery_type,
         })
-    return {'success': False, 'regions': regions}
+    return {'success': False, 'regions': results}
 
 
 @json_response(ajax_required=False, login_required=True)
