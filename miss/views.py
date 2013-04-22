@@ -100,7 +100,7 @@ def add_vote_view(request, region_id, vote):
     if current_vote is None:
         current_vote = 0
 
-    return {'success': True, 'current_vote_value': current_vote}
+    return {'success': True, 'current_vote': current_vote}
 
 @json_response(ajax_required=False, login_required=False)
 def login_view(request):
